@@ -2,6 +2,7 @@ package com.examen.cl2.Gutierrez_Eddy.service.impl;
 
 import com.examen.cl2.Gutierrez_Eddy.dto.FilmCreateDTO;
 import com.examen.cl2.Gutierrez_Eddy.dto.FilmDTO;
+import com.examen.cl2.Gutierrez_Eddy.dto.FilmDeleteDTO;
 import com.examen.cl2.Gutierrez_Eddy.dto.FilmDetailDTO;
 import com.examen.cl2.Gutierrez_Eddy.entity.Film;
 import com.examen.cl2.Gutierrez_Eddy.entity.Language;
@@ -122,5 +123,34 @@ public class CrudMaintenanceServiceImpl implements CrudMaintenanceService {
 
         filmRepository.save(film);
 
+    }
+
+    @Override
+    public FilmDeleteDTO getFilmDeleteById(int id) {
+        Optional<Film> optional = filmRepository.findById(id);
+
+        return optional.map(
+                film -> new FilmDeleteDTO(
+                        film.getFilmId(),
+                        film.getTitle(),
+                        film.getDescription(),
+                        film.getReleaseYear(),
+                        film.getLanguage().getLanguageId(),
+                        film.getRentalDuration(),
+                        film.getRentalRate(),
+                        film.getLength(),
+                        film.getReplacementCost(),
+                        film.getSpecialFeatures())
+
+        ).orElse(null);
+    }
+
+    @Override
+    public void postFilmDeleteById(int id, FilmDeleteDTO FilmDeleteDTO) {
+        Optional<Film> optional = filmRepository.findById(id);
+
+        Film film = optional.orElseThrow(() -> new EntityNotFoundException("Film NO EXISTE"));
+
+        filmRepository.delete(film);
     }
 }

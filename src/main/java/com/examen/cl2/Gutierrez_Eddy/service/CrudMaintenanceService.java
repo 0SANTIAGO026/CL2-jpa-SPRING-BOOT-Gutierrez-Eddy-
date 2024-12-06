@@ -2,6 +2,7 @@ package com.examen.cl2.Gutierrez_Eddy.service;
 
 import com.examen.cl2.Gutierrez_Eddy.dto.FilmCreateDTO;
 import com.examen.cl2.Gutierrez_Eddy.dto.FilmDTO;
+import com.examen.cl2.Gutierrez_Eddy.dto.FilmDeleteDTO;
 import com.examen.cl2.Gutierrez_Eddy.dto.FilmDetailDTO;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface CrudMaintenanceService {
     public void postFilmCreate(FilmCreateDTO filmCreateDto);
 
     //Para Eliminar
-    //FilmDeleteDto getFilmDeleteById(int id);
+    FilmDeleteDTO getFilmDeleteById(int id);
 
-    //public void postFilmDeleteById(int id, FilmDeleteDto filmDeleteDto);
+    public void postFilmDeleteById(int id, FilmDeleteDTO FilmDeleteDTO);
 }
